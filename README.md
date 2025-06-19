@@ -1,15 +1,23 @@
-import time
+import random
+import string
 
-def stopwatch():
-    print("Stopwatch started. Press ENTER to stop.")
-    start_time = time.time()
-    input()
-    end_time = time.time()
-    elapsed = end_time - start_time
-    print(f"Elapsed time: {time.strftime('%H:%M:%S', time.gmtime(elapsed))}")
+def generate_password(length=12, use_upper=True, use_lower=True, use_digits=True, use_special=True):
+    characters = ''
+    if use_upper:
+        characters += string.ascii_uppercase
+    if use_lower:
+        characters += string.ascii_lowercase
+    if use_digits:
+        characters += string.digits
+    if use_special:
+        characters += string.punctuation
 
-def digital_clock():
-    try:
-        while True:
-            current_time = time.strftime('%H:%M:%S')
-            print(f"
+    if not characters:
+        return "Please select at least one character type."
+
+    password = ''.join(random.choice(characters) for _ in range(length))
+    return password
+
+# Example usage
+password = generate_password(length=16, use_upper=True, use_lower=True, use_digits=True, use_special=True)
+print("Generated Password:", password)
